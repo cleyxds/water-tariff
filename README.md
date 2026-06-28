@@ -265,6 +265,14 @@ Migration inicial:
 src/main/resources/db/migration/V1__create_tariff_tables.sql
 ```
 
+Seed inicial:
+
+```txt
+src/main/resources/db/migration/V2__seed_tariff_tables.sql
+```
+
+O seed cria uma tabela tarifária padrão com as categorias `COMERCIAL`, `INDUSTRIAL`, `PARTICULAR` e `PUBLICO`, além de faixas de consumo de exemplo.
+
 Tabelas principais:
 
 - `tariff_tables`
