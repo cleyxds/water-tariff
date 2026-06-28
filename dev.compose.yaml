@@ -1,0 +1,22 @@
+name: water-tariff
+services:
+  postgresql:
+    image: postgres:16.3
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: watertariffadmin
+      POSTGRES_PASSWORD: supersecretpassword
+      POSTGRES_DB: watertariff
+    networks:
+      - water-tariff
+    restart: unless-stopped
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+
+volumes:
+  postgresql-data:
+
+networks:
+  water-tariff:
+    driver: bridge
