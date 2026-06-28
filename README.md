@@ -203,8 +203,8 @@ Request:
 
 ```json
 {
-  "categoria": "INDUSTRIAL",
-  "consumo": 18
+  "category": "INDUSTRIAL",
+  "consumption": 18
 }
 ```
 
@@ -212,26 +212,26 @@ Resposta:
 
 ```json
 {
-  "categoria": "INDUSTRIAL",
-  "consumoTotal": 18,
-  "valorTotal": 26.0,
-  "detalhamento": [
+  "category": "INDUSTRIAL",
+  "totalConsumption": 18,
+  "totalAmount": 26.0,
+  "details": [
     {
-      "faixa": {
-        "inicio": 0,
-        "fim": 10
+      "range": {
+        "start": 0,
+        "end": 10
       },
-      "m3Cobrados": 10,
-      "valorUnitario": 1.0,
+      "chargedM3": 10,
+      "unitPrice": 1.0,
       "subtotal": 10.0
     },
     {
-      "faixa": {
-        "inicio": 11,
-        "fim": 20
+      "range": {
+        "start": 11,
+        "end": 20
       },
-      "m3Cobrados": 8,
-      "valorUnitario": 2.0,
+      "chargedM3": 8,
+      "unitPrice": 2.0,
       "subtotal": 16.0
     }
   ]
@@ -348,14 +348,15 @@ curl -X POST http://localhost:8080/api/tabelas-tarifarias \
 curl -X POST http://localhost:8080/api/calculos \
   -H "Content-Type: application/json" \
   -d '{
-    "categoria": "INDUSTRIAL",
-    "consumo": 18
+    "category": "INDUSTRIAL",
+    "consumption": 18
   }'
 ```
 
 ## 11. Decisões técnicas
 
 - API REST com recursos em português para seguir os endpoints pedidos no desafio.
+- Campos de request e response em inglês por decisão própria de padronização.
 - DTOs para separar contrato HTTP das entidades JPA.
 - Spring Data JPA para reduzir código de persistência.
 - Flyway para versionar a estrutura do banco.
