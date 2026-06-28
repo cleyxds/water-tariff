@@ -26,8 +26,8 @@ import java.util.UUID;
         name = "consumer_categories",
         uniqueConstraints = {
                 @UniqueConstraint(
-                        name = "uk_consumer_category_per_tariff",
-                        columnNames = {"tariff_id", "code"}
+                        name = "uk_consumer_category_per_tariff_table",
+                        columnNames = {"tariff_table_id", "code"}
                 )
         }
 )
@@ -48,8 +48,8 @@ public class ConsumerCategory {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tariff_id", nullable = false)
-    private Tariff tariff;
+    @JoinColumn(name = "tariff_table_id", nullable = false)
+    private TariffTable tariffTable;
 
     @Builder.Default
     @OneToMany(mappedBy = "consumerCategory", cascade = CascadeType.ALL, orphanRemoval = true)

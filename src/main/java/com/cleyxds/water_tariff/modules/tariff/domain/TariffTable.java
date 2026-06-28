@@ -22,12 +22,12 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tariffs")
+@Table(name = "tariff_tables")
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tariff {
+public class TariffTable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -50,7 +50,7 @@ public class Tariff {
     private LocalDateTime updatedAt;
 
     @Builder.Default
-    @OneToMany(mappedBy = "tariff", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "tariffTable", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ConsumerCategory> categories = new ArrayList<>();
 
     @PrePersist

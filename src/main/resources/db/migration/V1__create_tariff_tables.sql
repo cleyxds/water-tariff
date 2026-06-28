@@ -1,4 +1,4 @@
-CREATE TABLE tariffs (
+CREATE TABLE tariff_tables (
     id UUID PRIMARY KEY,
     name VARCHAR(120) NOT NULL,
     effective_date DATE NOT NULL,
@@ -11,13 +11,13 @@ CREATE TABLE consumer_categories (
     id UUID PRIMARY KEY,
     code VARCHAR(50) NOT NULL,
     name VARCHAR(120) NOT NULL,
-    tariff_id UUID NOT NULL,
-    CONSTRAINT fk_consumer_category_tariff
-        FOREIGN KEY (tariff_id)
-        REFERENCES tariffs(id)
+    tariff_table_id UUID NOT NULL,
+    CONSTRAINT fk_consumer_category_tariff_table
+        FOREIGN KEY (tariff_table_id)
+        REFERENCES tariff_tables(id)
         ON DELETE CASCADE,
-    CONSTRAINT uk_consumer_category_per_tariff
-        UNIQUE (tariff_id, code)
+    CONSTRAINT uk_consumer_category_per_tariff_table
+        UNIQUE (tariff_table_id, code)
 );
 
 CREATE TABLE consumption_ranges (
