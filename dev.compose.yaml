@@ -13,6 +13,28 @@ services:
     restart: unless-stopped
     volumes:
       - postgresql-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U watertariffadmin -d watertariff"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      DB_URL: jdbc:postgresql://postgresql:5432/watertariff
+      DB_USERNAME: watertariffadmin
+      DB_PASSWORD: supersecretpassword
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    networks:
+      - water-tariff
+    depends_on:
+      postgresql:
+        condition: service_healthy
 
 volumes:
   postgresql-data:

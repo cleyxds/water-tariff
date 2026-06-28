@@ -14,7 +14,6 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: false
-    defer-datasource-initialization: true
     hibernate:
       ddl-auto: update
     properties:
@@ -23,7 +22,7 @@ spring:
 
   sql:
     init:
-      mode: always
+      mode: never
 
   flyway:
     enabled: true
