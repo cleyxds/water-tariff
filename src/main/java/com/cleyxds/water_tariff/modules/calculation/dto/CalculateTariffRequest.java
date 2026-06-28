@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record CalculateTariffRequest(
-        @NotBlank String categoria,
+        @NotBlank String category,
 
-        @NotNull @Min(0) Integer consumo) {
+        @NotNull @Min(0) Integer consumption) {
 }

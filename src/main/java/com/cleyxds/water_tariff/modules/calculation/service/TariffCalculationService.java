@@ -28,7 +28,7 @@ public class TariffCalculationService {
     public CalculateTariffResponse calculate(CalculateTariffRequest request) {
         ConsumerCategory category = consumerCategoryRepository
                 .findByCodeIgnoreCaseAndTariffTableActiveTrueOrderByTariffTableEffectiveDateDescTariffTableCreatedAtDesc(
-                        request.categoria().trim())
+                        request.category().trim())
                 .stream()
                 .findFirst()
                 .orElseThrow(() -> new NotFoundException("Categoria tarifaria ativa nao encontrada"));
@@ -38,17 +38,17 @@ public class TariffCalculationService {
                 .sorted(Comparator.comparing(ConsumptionRange::getStartM3))
                 .toList();
 
-        validateConsumptionCoverage(request.consumo(), ranges);
+        validateConsumptionCoverage(request.consumption(), ranges);
 
         List<CalculationRangeDetailResponse> details = new ArrayList<>();
         BigDecimal total = BigDecimal.ZERO;
 
         for (ConsumptionRange range : ranges) {
-            if (request.consumo() <= range.getStartM3() && range.getStartM3() > 0) {
+            if (request.consumption() <= range.getStartM3() && range.getStartM3() > 0) {
                 break;
             }
 
-            int chargedM3 = calculateChargedM3(request.consumo(), range);
+            int chargedM3 = calculateChargedM3(request.consumption(), range);
 
             if (chargedM3 <= 0) {
                 continue;
@@ -66,7 +66,7 @@ public class TariffCalculationService {
 
         return new CalculateTariffResponse(
                 category.getCode(),
-                request.consumo(),
+                request.consumption(),
                 total,
                 details);
     }
