@@ -8,7 +8,7 @@ import com.cleyxds.water_tariff.modules.tariff.domain.ConsumerCategory;
 import com.cleyxds.water_tariff.modules.tariff.domain.ConsumptionRange;
 import com.cleyxds.water_tariff.modules.tariff.repository.ConsumerCategoryRepository;
 import com.cleyxds.water_tariff.shared.exception.BusinessException;
-import com.cleyxds.water_tariff.shared.exception.ResourceNotFoundException;
+import com.cleyxds.water_tariff.shared.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +31,7 @@ public class TariffCalculationService {
                         request.categoria().trim())
                 .stream()
                 .findFirst()
-                .orElseThrow(() -> new ResourceNotFoundException("Categoria tarifaria ativa nao encontrada"));
+                .orElseThrow(() -> new NotFoundException("Categoria tarifaria ativa nao encontrada"));
 
         List<ConsumptionRange> ranges = category.getRanges()
                 .stream()

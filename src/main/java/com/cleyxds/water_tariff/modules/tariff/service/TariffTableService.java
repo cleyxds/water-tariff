@@ -10,7 +10,7 @@ import com.cleyxds.water_tariff.modules.tariff.dto.CreateConsumptionRangeRequest
 import com.cleyxds.water_tariff.modules.tariff.dto.CreateTariffTableRequest;
 import com.cleyxds.water_tariff.modules.tariff.dto.TariffTableResponse;
 import com.cleyxds.water_tariff.modules.tariff.repository.TariffTableRepository;
-import com.cleyxds.water_tariff.shared.exception.ResourceNotFoundException;
+import com.cleyxds.water_tariff.shared.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,13 +53,13 @@ public class TariffTableService {
     public TariffTableResponse findActiveById(UUID id) {
         return tariffTableRepository.findByIdAndActiveTrue(id)
                 .map(this::toResponse)
-                .orElseThrow(() -> new ResourceNotFoundException("Tabela tarifaria nao encontrada"));
+                .orElseThrow(() -> new NotFoundException("Tabela tarifaria nao encontrada"));
     }
 
     @Transactional
     public void disable(UUID id) {
         TariffTable tariffTable = tariffTableRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Tabela tarifaria nao encontrada"));
+                .orElseThrow(() -> new NotFoundException("Tabela tarifaria nao encontrada"));
 
         tariffTable.setActive(false);
     }
