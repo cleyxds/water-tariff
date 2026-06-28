@@ -13,6 +13,8 @@ import java.util.Set;
 @Component
 public class TariffTableRangeValidator {
 
+    private static final int MAX_SUPPORTED_CONSUMPTION_M3 = 99999;
+
     public void validate(List<CreateConsumerCategoryRequest> categories) {
         Set<String> categoryCodes = new HashSet<>();
 
@@ -50,6 +52,14 @@ public class TariffTableRangeValidator {
             }
 
             expectedStart = range.endM3() + 1;
+        }
+
+        CreateConsumptionRangeRequest lastRange = sortedRanges.getLast();
+
+        if (lastRange.endM3() < MAX_SUPPORTED_CONSUMPTION_M3) {
+            throw new BusinessException(
+                    "A ultima faixa da categoria " + categoryCode + " deve cobrir consumo ate "
+                            + MAX_SUPPORTED_CONSUMPTION_M3 + " m3");
         }
     }
 }

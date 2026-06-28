@@ -253,6 +253,7 @@ Resposta:
 - As faixas devem ser contínuas.
 - As faixas não podem se sobrepor.
 - O consumo informado deve estar coberto pelas faixas cadastradas.
+- A última faixa deve cobrir consumo até pelo menos `99999 m3`.
 
 ## 8. Banco de dados e migrations
 
